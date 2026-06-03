@@ -17,6 +17,9 @@ namespace Logica
         {
             _encriptados = encriptados;
             _exfiltracion = exfiltracion;
+
+            Encriptados = encriptados;
+            Exfiltraciones = exfiltracion;
         }
 
         public override string ToString()

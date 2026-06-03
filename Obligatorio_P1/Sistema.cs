@@ -25,10 +25,11 @@ namespace Logica
         private List<Cuenta> _cuentas = new List<Cuenta>();
         private List<Activo> _activos = new List<Activo>();
         private List<Incidente> _incidentes = new List<Incidente>();
+        private static Sistema _instancia;
 
-    // Propiedades
+        // Propiedades
 
-    public List<Persona> Personas { get { return new List<Persona>(_personas); } }
+        public List<Persona> Personas { get { return new List<Persona>(_personas); } }
         public List<Cuenta> Cuentas { get { return new List<Cuenta>(_cuentas); } }
         public List<Activo> Activos { get { return new List<Activo>(_activos); } }
         public List<Incidente> Incidentes { get { return new List<Incidente>(_incidentes); } }
@@ -43,7 +44,17 @@ namespace Logica
             _cuentas = new List<Cuenta>();
             _incidentes = new List<Incidente>();
 
+            PrecargarDatos();
 
+        }
+
+        public static Sistema Instancia
+        {
+            get
+            {
+                if (_instancia == null) _instancia = new Sistema();
+                return _instancia;
+            }
         }
 
         // Listas inicializadas
@@ -53,16 +64,16 @@ namespace Logica
         {
 
             // PERSONAS
-            altaPersona(new Persona(10111111, "Ana Torres", "ana.torres@gmail.com", 99100001, Cargo.OPERADOR));
-            altaPersona(new Persona(10222222, "Luis Gomez", "luis.gomez@gmail.com", 99100002, Cargo.OPERADOR));
-            altaPersona(new Persona(10333333, "Carla Ruiz", "carla.ruiz@gmail.com", 99100003, Cargo.OPERADOR));
-            altaPersona(new Persona(10444444, "Diego Martinez", "diego.martinez@gmail.com", 99100004, Cargo.OPERADOR));
-            altaPersona(new Persona(10555555, "Sofia Lopez", "sofia.lopez@gmail.com", 99100005, Cargo.OPERADOR));
-            altaPersona(new Persona(10666666, "Pedro Sanchez", "pedro.sanchez@gmail.com", 99100006, Cargo.OPERADOR));
-            altaPersona(new Persona(10777777, "Lucia Fernandez", "lucia.fernandez@gmail.com", 99100007, Cargo.ADMINISTRADOR));
-            altaPersona(new Persona(10888888, "Martin Castro", "martin.castro@gmail.com", 99100008, Cargo.ADMINISTRADOR));
-            altaPersona(new Persona(10999999, "Valeria Diaz", "valeria.diaz@gmail.com", 99100009, Cargo.ADMINISTRADOR));
-            altaPersona(new Persona(11000000, "Javier Morales", "javier.morales@gmail.com", 99100010, Cargo.ADMINISTRADOR));
+            altaPersona(new Persona(10111111, "Ana Torres", "ana.torres@gmail.com", "Ana1234", 99100001, Cargo.OPERADOR));
+            altaPersona(new Persona(10222222, "Luis Gomez", "luis.gomez@gmail.com", "Luis1234", 99100002, Cargo.OPERADOR));
+            altaPersona(new Persona(10333333, "Carla Ruiz", "carla.ruiz@gmail.com", "Carla1234", 99100003, Cargo.OPERADOR));
+            altaPersona(new Persona(10444444, "Diego Martinez", "diego.martinez@gmail.com", "Diego1234", 99100004, Cargo.OPERADOR));
+            altaPersona(new Persona(10555555, "Sofia Lopez", "sofia.lopez@gmail.com", "Sofia1234", 99100005, Cargo.OPERADOR));
+            altaPersona(new Persona(10666666, "Pedro Sanchez", "pedro.sanchez@gmail.com", "Pedro1234", 99100006, Cargo.OPERADOR));
+            altaPersona(new Persona(10777777, "Lucia Fernandez", "lucia.fernandez@gmail.com", "Lucia1234", 99100007, Cargo.ADMINISTRADOR));
+            altaPersona(new Persona(10888888, "Martin Castro", "martin.castro@gmail.com", "Martin1234", 99100008, Cargo.ADMINISTRADOR));
+            altaPersona(new Persona(10999999, "Valeria Diaz", "valeria.diaz@gmail.com", "Valeria1234", 99100009, Cargo.ADMINISTRADOR));
+            altaPersona(new Persona(11000000, "Javier Morales", "javier.morales@gmail.com", "Javier1234", 99100010, Cargo.ADMINISTRADOR));
 
             // CUENTAS
             altaCuenta(new Cuenta(1, _personas[0], true, new DateTime(2023, 1, 10)));
@@ -267,7 +278,17 @@ namespace Logica
             return null;
         }
 
+        public Persona login(string email, string pass) {
 
+            foreach (Persona per in _personas) {
+                if (email == per.Email && pass == per.Contraseña)
+                {
+                    return per;
+                }
+
+            }
+            return null; 
+        }
 
     }
 

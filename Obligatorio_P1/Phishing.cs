@@ -12,7 +12,7 @@ namespace Logica
 
         public string CanalUsado { get; set; }
         public bool Credenciales { get; set; }
-        public bool Trasferencias { get; set; }
+        public bool Transferencias { get; set; }
 
         public Phishing(int id, DateTime fechaReportado, Activo activoAfectado, string descripcion, Estado estado, int impacto, int probabilidad, string canalUsado, bool credenciales, bool transferencias)
             : base(id, fechaReportado, activoAfectado, descripcion, estado, impacto, probabilidad)
@@ -20,6 +20,10 @@ namespace Logica
             _canalUsado = canalUsado;
             _credenciales = credenciales;
             _transferencias = transferencias;
+
+            CanalUsado = canalUsado;
+            Credenciales = credenciales;
+            Transferencias = transferencias;
         }
 
         public override string ToString()
@@ -31,7 +35,7 @@ namespace Logica
 
         public void validarCanal() 
         { 
-            if(String.IsNullOrEmpty(_canalUsado))        
+            if (string.IsNullOrWhiteSpace(CanalUsado))
                 throw new Exception("El canal usado no puede estar vacío.");
         }
         public override void Validacion()

@@ -32,12 +32,20 @@ namespace Logica
             _impacto = impacto;
             this.probabilidad = probabilidad;
 
+            ID = id;
+            FechaReportado = fechaReportado;
+            ActivoAfectado = activoAfectado;
+            Descripcion = descripcion;
+            Estado = estado;
+            Impacto = impacto;
+            Probabilidad = probabilidad;
+
             
         }
 
         public void ValidarDescripcion() 
         {
-            if (string.IsNullOrEmpty(_descripcion)) throw new Exception("La descripcion no puede estar vacia");
+            if (string.IsNullOrEmpty(Descripcion)) throw new Exception("La descripcion no puede estar vacia");
         }
 
         public virtual void Validacion() 
