@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="~/ObligatorioWeb.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
+    <header class="h">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ObligatorioWeb</a>
@@ -23,10 +23,24 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+
+                        @if (Context.Session.GetString("rol") == "OPERADOR")
+                            {
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Persona" asp-action="Activos">Ver Activos</a>
+                            </li>
+                            }
+
+
+                        @if (Context.Session.GetString("rol") != null){
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="LogOut">LogOut</a>
                         </li>
-                    </ul>
+                        }
+
+
+                        </ul>
                 </div>
             </div>
         </nav>

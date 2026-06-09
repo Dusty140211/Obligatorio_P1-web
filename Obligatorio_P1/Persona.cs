@@ -22,6 +22,8 @@ namespace Obligatorio_P1
             Cargo = cargo;
         }
 
+        public Persona() { }
+
         public void validarNombre() 
         {
             if (string.IsNullOrEmpty(Nombre)) throw new Exception("el nombre no puede estar vacio");
@@ -29,7 +31,9 @@ namespace Obligatorio_P1
 
         public void validarEmail() 
         {
-            if (string.IsNullOrEmpty(Email)) throw new Exception("El email no puede estar vacío");
+            string email = Email.ToLower();
+
+            if (string.IsNullOrEmpty(email)) throw new Exception("El email no puede estar vacío");
 
             if (Email.IndexOf('@') == -1) 
             { 

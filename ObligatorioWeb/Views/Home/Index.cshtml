@@ -4,9 +4,19 @@
 
 <body>
     <main>
-        <h1>Bienvenido</h1>
-        <p>Selecciona la Opcion mas conveniente</p>
-        <a href="/Home/Login">Iniciar Sesion</a>
-        <a href="/Persona/Registro">Registrarse</a>
-    </main>
+     
+        
+        @if (Context.Session.GetString("rol") == null)
+            {
+                <h1>Bienvenido</h1>
+                <p>Selecciona la Opcion mas conveniente</p>
+                <a href="/Home/Login">Iniciar Sesion</a>
+                <a href="/Persona/Registro">Registrarse</a>
+            }
+            else
+            {
+                <h1>Bienvenido</h1>
+                <p>Que bueno verte de nuevo</p>
+            }
+        </main>
 </body>

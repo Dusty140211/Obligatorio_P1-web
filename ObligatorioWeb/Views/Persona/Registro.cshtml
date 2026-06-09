@@ -3,4 +3,33 @@
 *@
 @{
 }
-<p>REGISTRESE</p>
+@using Logica;
+@using Obligatorio_P1
+@model Persona;
+
+<form method="post">
+
+    <h1>REGISTRESE</h1>
+    <p>Ingrese sus datos</p>
+    <br />
+    <label for="Cedula">Cedula: </label>
+    <input type="number" name="Cedula" value="@Model.Cedula" >
+    <br />
+    <label for="Nombre">Nombre: </label>
+    <input type="text" name="Nombre" />
+    <br />
+    <label for="Email">Email: </label>
+    <input type="text" name="Email" />
+    <br />
+    <label for="Contraseña">Constraseña: </label>
+    <input type="text" name="Contraseña" />
+    <br />
+    <label for="Telefono">Telefono: </label>
+    <input type="number" name="Telefono" />
+    <br />
+    <input type="submit"/>
+
+    
+
+</form>
+@ViewBag.Error

@@ -50,15 +50,11 @@ namespace ObligatorioWeb.Controllers
        
 
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        public IActionResult LogOut() {
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            HttpContext.Session.Clear();
+            return RedirectToAction("index", "Home");
+
         }
     }
 }
