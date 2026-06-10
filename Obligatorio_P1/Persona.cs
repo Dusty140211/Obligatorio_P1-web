@@ -5,7 +5,7 @@ namespace Obligatorio_P1
     public class Persona
     {
 
-        public int Cedula { get; set; }
+        public string Cedula { get; set; }
         public string Nombre { get; set; }
         public string Email { get; set; }
         public string Contraseña { get; set; }

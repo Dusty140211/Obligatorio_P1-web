@@ -200,7 +200,7 @@ namespace Logica
         // b
         // ESTE METODO RECORRE LA LISTA DE INCIDENTES Y POR CADA INCIDENTE VERIFICA SI AFECTA A LA PERSONA QUE SE LE PASA POR PARAMETRO, SI ES ASI, SE AGREGA A LA LISTA QUE SE DEVOLVERA AL FINAL, ESTA LISTA CONTENDRA LOS INCIDENTES EN LOS QUE LA PERSONA ESTUVO INVOLUCRADA
 
-        public List<Incidente> incidentesPorActivo(int cedula)
+        public List<Incidente> incidentesPorActivo(string cedula)
         {
 
             List<Incidente> Lista = new List<Incidente>();
@@ -266,7 +266,7 @@ namespace Logica
 
 
         // Busca a las personas la cuales su cedula sea igual a la enviada en parametros 
-        public Persona BuscarPersonaPorCedula(int cedula)
+        public Persona BuscarPersonaPorCedula(string cedula)
         {
             foreach (Persona per in _personas)
             {
