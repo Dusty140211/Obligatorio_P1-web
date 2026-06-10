@@ -1,0 +1,28 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@using Obligatorio_P1
+@model Persona
+
+<h1>Perfil de <span class="usuario-sesion">@Context.Session.GetString("nombre")</span></h1>
+
+<label>Nombre</label>
+<p>@Model.Nombre</p>
+<label>Email</label>
+<p>@Model.Email</p>
+<label>Rol</label>
+<p>@Model.Cargo</p>
+
+
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>MFA</th>
+        <th>Ultimo cambio de contraseña</th>
+    </tr>
+
+</table>

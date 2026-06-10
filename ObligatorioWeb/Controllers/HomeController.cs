@@ -28,8 +28,9 @@ namespace ObligatorioWeb.Controllers
 
                 if (logeado != null)
                 {
-                    HttpContext.Session.SetString("email", logeado.Nombre);
+                    HttpContext.Session.SetString("nombre", logeado.Nombre);
                     HttpContext.Session.SetString("rol", logeado.Cargo.ToString());
+                    HttpContext.Session.SetString("cedula", logeado.Cedula);
 
                     return RedirectToAction("Index", "Home");
 

@@ -6,9 +6,7 @@ namespace Logica
 {
     public class Phishing : Incidente
     {
-        private string _canalUsado;
-        private bool _credenciales;
-        private bool _transferencias;
+       
 
         public string CanalUsado { get; set; }
         public bool Credenciales { get; set; }
@@ -17,9 +15,7 @@ namespace Logica
         public Phishing(int id, DateTime fechaReportado, Activo activoAfectado, string descripcion, Estado estado, int impacto, int probabilidad, string canalUsado, bool credenciales, bool transferencias)
             : base(id, fechaReportado, activoAfectado, descripcion, estado, impacto, probabilidad)
         {
-            _canalUsado = canalUsado;
-            _credenciales = credenciales;
-            _transferencias = transferencias;
+            
 
             CanalUsado = canalUsado;
             Credenciales = credenciales;

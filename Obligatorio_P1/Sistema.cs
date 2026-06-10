@@ -64,16 +64,16 @@ namespace Logica
         {
 
             // PERSONAS
-            altaPersona(new Persona(10111111, "Ana Torres", "ana.torres@gmail.com", "Ana1234", 99100001, Cargo.OPERADOR));
-            altaPersona(new Persona(10222222, "Luis Gomez", "luis.gomez@gmail.com", "Luis1234", 99100002, Cargo.OPERADOR));
-            altaPersona(new Persona(10333333, "Carla Ruiz", "carla.ruiz@gmail.com", "Carla1234", 99100003, Cargo.OPERADOR));
-            altaPersona(new Persona(10444444, "Diego Martinez", "diego.martinez@gmail.com", "Diego1234", 99100004, Cargo.OPERADOR));
-            altaPersona(new Persona(10555555, "Sofia Lopez", "sofia.lopez@gmail.com", "Sofia1234", 99100005, Cargo.OPERADOR));
-            altaPersona(new Persona(10666666, "Pedro Sanchez", "pedro.sanchez@gmail.com", "Pedro1234", 99100006, Cargo.OPERADOR));
-            altaPersona(new Persona(10777777, "Lucia Fernandez", "lucia.fernandez@gmail.com", "Lucia1234", 99100007, Cargo.ADMINISTRADOR));
-            altaPersona(new Persona(10888888, "Martin Castro", "martin.castro@gmail.com", "Martin1234", 99100008, Cargo.ADMINISTRADOR));
-            altaPersona(new Persona(10999999, "Valeria Diaz", "valeria.diaz@gmail.com", "Valeria1234", 99100009, Cargo.ADMINISTRADOR));
-            altaPersona(new Persona(11000000, "Javier Morales", "javier.morales@gmail.com", "Javier1234", 99100010, Cargo.ADMINISTRADOR));
+            altaPersona(new Persona("10111111", "Ana Torres", "ana.torres@gmail.com", "Ana1234", 99100001, Cargo.OPERADOR));
+            altaPersona(new Persona("10222222", "Luis Gomez", "luis.gomez@gmail.com", "Luis1234", 99100002, Cargo.OPERADOR));
+            altaPersona(new Persona("10333333", "Carla Ruiz", "carla.ruiz@gmail.com", "Carla1234", 99100003, Cargo.OPERADOR));
+            altaPersona(new Persona("10444444", "Diego Martinez", "diego.martinez@gmail.com", "Diego1234", 99100004, Cargo.OPERADOR));
+            altaPersona(new Persona("10555555", "Sofia Lopez", "sofia.lopez@gmail.com", "Sofia1234", 99100005, Cargo.OPERADOR));
+            altaPersona(new Persona("10666666", "Pedro Sanchez", "pedro.sanchez@gmail.com", "Pedro1234", 99100006, Cargo.OPERADOR));
+            altaPersona(new Persona("10777777", "Lucia Fernandez", "lucia.fernandez@gmail.com", "Lucia1234", 99100007, Cargo.ADMINISTRADOR));
+            altaPersona(new Persona("10888888", "Martin Castro", "martin.castro@gmail.com", "Martin1234", 99100008, Cargo.ADMINISTRADOR));
+            altaPersona(new Persona("10999999", "Valeria Diaz", "valeria.diaz@gmail.com", "Valeria1234", 99100009, Cargo.ADMINISTRADOR));
+            altaPersona(new Persona("11000000", "Javier Morales", "javier.morales@gmail.com", "Javier1234", 99100010, Cargo.ADMINISTRADOR));
 
             // CUENTAS
             altaCuenta(new Cuenta(1, _personas[0], true, new DateTime(2023, 1, 10)));
@@ -191,10 +191,39 @@ namespace Logica
             List<Activo> resultado = new List<Activo>();
             foreach (Activo act in _activos)
             {
-                if (act.PerteneceAPersona(persona))
+              if(act.PerteneceAPersona(persona))
                     resultado.Add(act);
             }
             return resultado;
+        }
+
+        //Metodo que me pasa una persona segun la cedula
+
+        public Persona ObtenerPersona(string cedula) {
+            foreach(Persona p in _personas) {
+                if (p != null && p.Cedula == cedula) {
+                    return p;
+                }
+              }
+            return null; 
+        }
+
+        //Metodo que pasa una cuenta segun la cedula
+        public List<Cuenta> listarCuenta(Persona p) {
+            List<Cuenta> resultado = new List<Cuenta>();
+            foreach (Cuenta c in _cuentas) {
+                if (c.Titular == p)
+                {
+                    resultado.Add(c);
+
+                }
+                else
+                {
+                    return null;
+                }
+                
+            }
+            return resultado; 
         }
 
         // b

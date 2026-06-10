@@ -6,14 +6,7 @@ namespace Logica
 {
     public class Activo
     {
-        private int _id;
-        private string _name;
-        private tipoDeActivo _tipo;
-        private int _criticidad;
-        private Cuenta _cuenta;
-        private bool _backup;
-        private static int _contador;
-        
+        private static int _contador = 0;
         public int ID { get; set; }
         public string Name { get; set; }
 
@@ -24,12 +17,12 @@ namespace Logica
 
         public Activo(string nombre, tipoDeActivo tipo, int criticidad, Cuenta cuenta, bool backup)
         {
-            _id = _contador++;
-            _name = nombre;
-            _tipo = tipo;
-            _criticidad = criticidad;
-            _cuenta = cuenta;
-            _backup = backup;
+            ID = _contador++;
+            Name = nombre;
+            Tipo = tipo;
+            Criticidad = criticidad;
+            Cuenta = cuenta;
+            Backup = backup;
 
             validacion();
         }
@@ -37,7 +30,7 @@ namespace Logica
 
         public void ValidarNombre()
         {
-            if (string.IsNullOrEmpty(_name)) throw new Exception("El nombre no puede estar vacio");
+            if (string.IsNullOrEmpty(Name)) throw new Exception("El nombre no puede estar vacio");
         }
         public void validacion()
         {
@@ -58,7 +51,7 @@ namespace Logica
 
         public override bool Equals(object? obj)
         {
-            return obj is Activo a && _id.Equals(a._id);
+            return obj is Activo a && ID.Equals(a.ID);
         }
     }
 }

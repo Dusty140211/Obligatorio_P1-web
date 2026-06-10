@@ -12,7 +12,7 @@ namespace Obligatorio_P1
         public int Telefono { get; set; }
         public Cargo Cargo { get; set; }
 
-        public Persona(int cedula, string nombre, string email, string contraseña, int telefono, Cargo cargo)
+        public Persona(string cedula, string nombre, string email, string contraseña, int telefono, Cargo cargo)
         {
             Cedula = cedula;
             Nombre = nombre;

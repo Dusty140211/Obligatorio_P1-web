@@ -7,11 +7,6 @@ namespace Logica
 {
     public class Cuenta
     {
-        private int _id;
-        private Persona _titular;
-        private bool _mfa;
-        private DateTime _ucContraseña;
-
         public int ID { get; set; }
         public Persona Titular { get; set; }
         public bool MFA { get; set; }
@@ -20,10 +15,10 @@ namespace Logica
 
         public Cuenta(int id, Persona titular, bool mfa, DateTime ucContraseña)
         {
-            _id = id;
-            _titular = titular;
-            _mfa = mfa;
-            _ucContraseña = ucContraseña;
+            ID = id;
+            Titular = titular;
+            MFA = mfa;
+            UCContrase = ucContraseña;
         }
 
         public override string ToString()
@@ -33,7 +28,7 @@ namespace Logica
 
         public override bool Equals(object? obj)
         {
-            return obj is Cuenta c && _id.Equals(c._id);
+            return obj is Cuenta c && ID.Equals(c.ID);
         }
 
         public bool EsDeTitular(Persona persona)

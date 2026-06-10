@@ -28,8 +28,11 @@
                             {
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Persona" asp-action="Activos">Ver Activos</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Persona" asp-action="ListadoActivos">Ver Activos</a>
                             </li>
+                            
+
+                            
                             }
 
 
@@ -39,8 +42,13 @@
                         </li>
                         }
 
+                    </ul>
 
-                        </ul>
+                    @if (!string.IsNullOrEmpty(Context.Session.GetString("nombre")))
+                    {
+                        <span class="usuario-sesion">@Context.Session.GetString("nombre")</span>
+                    }
+
                 </div>
             </div>
         </nav>

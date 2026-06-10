@@ -7,14 +7,6 @@ namespace Logica
 {
     public abstract class Incidente
     {
-        private int _id;
-        private DateTime _fechaReportado; 
-        private Activo _activoAfectado;
-        private string _descripcion;
-        private Estado _estado;
-        private int _impacto;
-        private int probabilidad; 
-
         public int ID { get; set; }
         public DateTime FechaReportado { get; set; }
         public Activo ActivoAfectado { get; set; }
@@ -24,14 +16,6 @@ namespace Logica
         public int Probabilidad { get; set; }
         public Incidente(int id, DateTime fechaReportado, Activo activoAfectado, string descripcion, Estado estado, int impacto, int probabilidad)
         {
-            _id = id;
-            _fechaReportado = fechaReportado;
-            _activoAfectado = activoAfectado;
-            _descripcion = descripcion;
-            _estado = estado;
-            _impacto = impacto;
-            this.probabilidad = probabilidad;
-
             ID = id;
             FechaReportado = fechaReportado;
             ActivoAfectado = activoAfectado;
@@ -67,7 +51,7 @@ namespace Logica
 
         public override bool Equals(object? obj)
         {
-            return obj is Incidente inc && _id.Equals(inc._id);
+            return obj is Incidente inc && ID.Equals(inc.ID);
         }
         
     }

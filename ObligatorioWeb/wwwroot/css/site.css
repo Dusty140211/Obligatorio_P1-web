@@ -34,3 +34,38 @@ body {
     display: flex;
     align-content: space-between;
 }
+
+.activos-page {
+    margin-top: 1.5rem;
+}
+
+.activos-form {
+    width: 100%;
+}
+
+.activos-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.08);
+}
+
+.activos-table th,
+.activos-table td {
+    border: 1px solid #d9d9d9;
+    padding: 0.75rem 1rem;
+    text-align: left;
+}
+
+.activos-table thead th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.activos-table tbody tr:nth-child(even) {
+    background-color: #fdfdfd;
+}
+
+.activos-table tbody tr:hover {
+    background-color: #f1f7ff;
+}
