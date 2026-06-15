@@ -12,12 +12,14 @@ namespace ObligatorioWeb.Controllers.PersonaCar
             return View();
         }
 
-        public IActionResult Registro() {
+        public IActionResult Registro()
+        {
             return View(new Persona());
         }
 
         [HttpPost]
-        public IActionResult Registro(Persona p) {
+        public IActionResult Registro(Persona p)
+        {
             try
             {
 
@@ -28,20 +30,22 @@ namespace ObligatorioWeb.Controllers.PersonaCar
 
 
             }
-            catch 
-            { 
+            catch
+            {
                 ViewBag.Error = "Error al registrar la persona";
                 return View(p);
             }
         }
 
-        
-        public IActionResult ListadoActivos() {
-            return View(); 
+
+        public IActionResult ListadoActivos()
+        {
+            return View();
         }
 
         [HttpGet]
-        public IActionResult ListadoActivos(string cedula) {
+        public IActionResult ListadoActivos(string cedula)
+        {
 
             try
             {
@@ -63,8 +67,9 @@ namespace ObligatorioWeb.Controllers.PersonaCar
             }
         }
 
-        public IActionResult Perfil() {
-            return View(); 
+        public IActionResult Perfil()
+        {
+            return View();
         }
 
         [HttpGet]
@@ -72,15 +77,21 @@ namespace ObligatorioWeb.Controllers.PersonaCar
         {
             try
             {
+                Persona p = null;
+                List<Cuenta> cuentas = new List<Cuenta>(); 
+
                 if (HttpContext.Session.GetString("rol") == "OPERADOR")
                 {
                     cedula = HttpContext.Session.GetString("cedula");
-                    Persona p = s.ObtenerPersona(cedula);
-                    List<Cuenta> c = s.listarCuenta(p);
+                    p = s.ObtenerPersona(cedula);
+                   
+                    cuentas = s.listarCuenta(p) ?? new List<Cuenta>();
 
-                    ViewBag.Cuentas = c;
+
                 }
-                return View();
+                ViewBag.Cuenta = cuentas;
+                return View(p);
+               
             }
             catch
             {
@@ -91,6 +102,6 @@ namespace ObligatorioWeb.Controllers.PersonaCar
             }
 
         }
-
+    }
    
 }

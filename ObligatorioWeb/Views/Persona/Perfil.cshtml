@@ -4,6 +4,7 @@
 *@
 @{
 }
+@using Logica
 @using Obligatorio_P1
 @model Persona
 
@@ -18,11 +19,22 @@
 
 
 
-<table>
+<div class="activos-page">
+    <table class="activos-table">
+    </hr>
+    <h2>DATOS DE LA CUENTA</h2>
     <tr>
         <th>ID</th>
         <th>MFA</th>
         <th>Ultimo cambio de contraseña</th>
     </tr>
-
+    @foreach (Cuenta cuenta in ViewBag.Cuenta)
+    {
+        <tr>
+            <td>@cuenta.ID</td>
+            <td>@cuenta.MFA</td>
+            <td>@cuenta.UCContrase</td>
+        </tr>
+    }
 </table>
+</div>

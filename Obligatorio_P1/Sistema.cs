@@ -211,17 +211,11 @@ namespace Logica
         //Metodo que pasa una cuenta segun la cedula
         public List<Cuenta> listarCuenta(Persona p) {
             List<Cuenta> resultado = new List<Cuenta>();
+            if (p == null) return resultado; 
             foreach (Cuenta c in _cuentas) {
-                if (c.Titular == p)
-                {
+                if (c != null && c.Titular == p) { 
                     resultado.Add(c);
-
                 }
-                else
-                {
-                    return null;
-                }
-                
             }
             return resultado; 
         }
