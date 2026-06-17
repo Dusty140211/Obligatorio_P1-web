@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Logica
 {
-    public class Cuenta
+    public class Cuenta : IComparable<Cuenta>
     {
         public int ID { get; set; }
         public Persona Titular { get; set; }
@@ -34,6 +34,12 @@ namespace Logica
         public bool EsDeTitular(Persona persona)
         {
             return Titular != null && Titular.Equals(persona);
+        }
+
+        public int CompareTo(Cuenta c) {
+
+            return ID.CompareTo(c.ID); 
+
         }
     }
 }

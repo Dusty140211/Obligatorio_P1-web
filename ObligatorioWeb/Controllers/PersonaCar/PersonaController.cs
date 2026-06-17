@@ -80,15 +80,14 @@ namespace ObligatorioWeb.Controllers.PersonaCar
                 Persona p = null;
                 List<Cuenta> cuentas = new List<Cuenta>(); 
 
-                if (HttpContext.Session.GetString("rol") == "OPERADOR")
-                {
+                
                     cedula = HttpContext.Session.GetString("cedula");
                     p = s.ObtenerPersona(cedula);
                    
                     cuentas = s.listarCuenta(p) ?? new List<Cuenta>();
 
 
-                }
+               
                 ViewBag.Cuenta = cuentas;
                 return View(p);
                

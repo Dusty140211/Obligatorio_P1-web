@@ -30,20 +30,18 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Persona" asp-action="ListadoActivos">Ver Activos</a>
                             </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Persona" asp-action="Perfil">Ver Perfil</a>
-                            </li>
-                            
-
                             
                             }
 
 
                         @if (Context.Session.GetString("rol") != null){
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="LogOut">LogOut</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="LogOut">LogOut</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Persona" asp-action="Perfil">Ver Perfil</a>
+                            </li>
                         }
 
                     </ul>
