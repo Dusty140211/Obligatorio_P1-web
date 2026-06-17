@@ -78,19 +78,19 @@ namespace ObligatorioWeb.Controllers.PersonaCar
             try
             {
                 Persona p = null;
-                List<Cuenta> cuentas = new List<Cuenta>(); 
-
-                
-                    cedula = HttpContext.Session.GetString("cedula");
-                    p = s.ObtenerPersona(cedula);
-                   
-                    cuentas = s.listarCuenta(p) ?? new List<Cuenta>();
+                List<Cuenta> cuentas = new List<Cuenta>();
 
 
-               
+                cedula = HttpContext.Session.GetString("cedula");
+                p = s.ObtenerPersona(cedula);
+
+                cuentas = s.listarCuenta(p) ?? new List<Cuenta>();
+
+
+
                 ViewBag.Cuenta = cuentas;
                 return View(p);
-               
+
             }
             catch
             {
@@ -100,6 +100,51 @@ namespace ObligatorioWeb.Controllers.PersonaCar
 
             }
 
+        }
+
+        
+
+
+        public IActionResult listarPersonas(){
+
+            try
+            {
+                List<Persona> personas; 
+
+                if (HttpContext.Session.GetString("rol") == "ADMINISTRADOR")
+                {
+                    personas = s.listarPersonas();
+                    return View(personas);
+
+                }
+
+                return View();
+            }
+            catch
+            {
+                ViewBag.Error = "Error al obtener las personas";
+                return View();
+            }
+        }
+
+        public IActionResult listarCuentas(string id) {
+            try {
+                List <Cuenta> cuentas;
+                if (HttpContext.Session.GetString("rol") == "ADMINISTRADOR") {
+                    
+                   
+                        Persona p = s.ObtenerPersona(id);
+                        cuentas = s.listarCuenta(p);
+                        return View(cuentas);
+                    
+                }
+                return View();
+            }
+            catch
+            {
+                ViewBag.Error = "Error al obtener las cuentas";
+                return View();
+            }
         }
     }
    

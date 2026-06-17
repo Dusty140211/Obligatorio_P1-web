@@ -3,34 +3,38 @@
 *@
 @{
 }
-@using Logica
 @using Obligatorio_P1
-@model List<Activo>
+@model List<Persona>
 
-
-<h1>Listado de activos</h1>
+<h1>Personas</h1>
 
 <div class="activos-page">
     <form method="get" class="activos-form">
         <table class="activos-table">
             <thead>
                 <tr>
+                    <th>Cedula</th>
                     <th>Nombre</th>
-                    <th>Tipo de Activo</th>
-                    <th>Criticidad</th>
-                    <th>Backup</th>
+                    <th>Email</th>
+                    <th>Telefono</th>
+                    <th>Cargo</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 
-                @foreach (Activo a in Model)
+                @foreach (Persona p in Model)
                 {
-                    @if(a != null){
+                    @if(p != null){
                     <tr>
-                        <td>@a.Name</td>
-                        <td>@a.Tipo</td>
-                        <td>@a.Criticidad</td>
-                        <td>@a.Backup</td>
+                        <td>@p.Cedula</td>
+                        <td>@p.Nombre</td>
+                        <td>@p.Email</td>
+                        <td>@p.Telefono</td>
+                        <td>@p.Cargo</td>
+                            <td>@Html.ActionLink("Cuentas", "listarCuentas", new {id = p.Cedula })</td>
+
+
                     </tr>
                     }
                     else
@@ -43,4 +47,3 @@
             </tbody>
         </table>
     </form>
-</div>

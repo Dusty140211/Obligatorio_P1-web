@@ -197,6 +197,23 @@ namespace Logica
             return resultado;
         }
 
+        // Metodo apra obtener todas las personas
+
+        public List<Persona> listarPersonas()
+        {
+
+            List<Persona> resultado = new List<Persona>();
+            foreach (Persona p in _personas)
+            {
+                if (p != null)
+                {
+                    resultado.Add(p);
+                }
+            }
+            return resultado;
+        }
+
+
         //Metodo que me pasa una persona segun la cedula
 
         public Persona ObtenerPersona(string cedula) {
@@ -220,38 +237,6 @@ namespace Logica
             return resultado; 
         }
 
-        // b
-        // ESTE METODO RECORRE LA LISTA DE INCIDENTES Y POR CADA INCIDENTE VERIFICA SI AFECTA A LA PERSONA QUE SE LE PASA POR PARAMETRO, SI ES ASI, SE AGREGA A LA LISTA QUE SE DEVOLVERA AL FINAL, ESTA LISTA CONTENDRA LOS INCIDENTES EN LOS QUE LA PERSONA ESTUVO INVOLUCRADA
-
-        public List<Incidente> incidentesPorActivo(string cedula)
-        {
-
-            List<Incidente> Lista = new List<Incidente>();
-            Persona personaBuscada = BuscarPersonaPorCedula(cedula);
-
-            if (personaBuscada == null) return Lista;
-
-            foreach (Incidente inc in _incidentes)
-            {
-                if (inc != null)
-                {
-                    if (inc.AfectaAPersona(personaBuscada))
-                    {
-                        Lista.Add(inc);
-                    }
-                }
-                else
-                {
-                    throw new Exception("El incidente es nulo.");
-                }
-
-            }
-
-            return Lista;
-
-
-        }
-
         // c
         // ALTA DE PERSONA
 
@@ -270,36 +255,7 @@ namespace Logica
 
         }
 
-        // d
-        // ESTE METODO RECORRE LA LISTA DE ACTIVOS Y POR CADA ACTIVO RECORRE LA LISTA DE PERSONAS, SI EL ACTIVO PERTENECE A LA PERSONA, SE VERIFICA SI EL ACTIVO TIENE BACKUP, SI NO TIENE BACKUP SE AGREGA A LA LISTA QUE SE DEVOLVERA AL FINAL, ESTA LISTA CONTENDRA LOS ACTIVOS QUE TIENEN PERSONAS ASOCIADAS PERO NO TIENEN BACKUP
-        public List<Activo> personasSinBackup()
-        {
-            List<Activo> Lista = new List<Activo>();
 
-            foreach (Activo activo in _activos)
-            {
-                if (activo != null && activo.Backup == false)
-                {
-                    Lista.Add(activo);
-                }
-            }
-
-            return Lista;
-        }
-
-
-        // Busca a las personas la cuales su cedula sea igual a la enviada en parametros 
-        public Persona BuscarPersonaPorCedula(string cedula)
-        {
-            foreach (Persona per in _personas)
-            {
-                if (per != null && per.Cedula == cedula)
-                {
-                    return per;
-                }
-            }
-            return null;
-        }
 
         public Persona login(string email, string pass) {
 
