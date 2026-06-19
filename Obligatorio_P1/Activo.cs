@@ -7,7 +7,7 @@ namespace Logica
     public class Activo
     {
         private static int _contador = 0;
-        public int ID { get; set; }
+        public int id { get; set; }
         public string Name { get; set; }
 
         public tipoDeActivo Tipo { get; set; }
@@ -15,9 +15,13 @@ namespace Logica
         public Cuenta Cuenta { get; set; }
         public bool Backup { get; set; }
 
+        public Activo(){
+            id = _contador++;
+        }
+
         public Activo(string nombre, tipoDeActivo tipo, int criticidad, Cuenta cuenta, bool backup)
         {
-            ID = _contador++;
+            id = _contador++;
             Name = nombre;
             Tipo = tipo;
             Criticidad = criticidad;
@@ -39,7 +43,7 @@ namespace Logica
 
         public override string ToString()
         {
-            return $"ID: {ID}, Nombre: {Name}, Tipo: {Tipo}, Criticidad: {Criticidad}, Cuenta: {Cuenta}, Backup: {Backup}";
+            return $"ID: {id}, Nombre: {Name}, Tipo: {Tipo}, Criticidad: {Criticidad}, Cuenta: {Cuenta}, Backup: {Backup}";
         }
 
 
@@ -51,7 +55,7 @@ namespace Logica
 
         public override bool Equals(object? obj)
         {
-            return obj is Activo a && ID.Equals(a.ID);
+            return obj is Activo a && id.Equals(a.id);
         }
     }
 }

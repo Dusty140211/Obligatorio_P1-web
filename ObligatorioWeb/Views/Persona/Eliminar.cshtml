@@ -1,0 +1,16 @@
+﻿@model Logica.Activo
+
+<h1>Baja de activo</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="id" />
+    <p><strong>Activo:</strong> @Model?.Name</p>
+    <p><strong>ID:</strong> @Model?.id</p>
+
+    <label>Realmente está seguro?</label>
+    <input type="checkbox" name="chequeado" value="true" />
+    <br />
+    <input type="submit" value="Eliminar" />
+</form>
+
+<a asp-action="ListadoActivos" asp-controller="Persona">Volver a listado</a>

@@ -15,10 +15,12 @@
         <table class="activos-table">
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Nombre</th>
                     <th>Tipo de Activo</th>
                     <th>Criticidad</th>
                     <th>Backup</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -27,10 +29,17 @@
                 {
                     @if(a != null){
                     <tr>
+                        <td>@a.id</td>
                         <td>@a.Name</td>
                         <td>@a.Tipo</td>
                         <td>@a.Criticidad</td>
                         <td>@a.Backup</td>
+                        @if (ViewBag.IsAdmin)
+                            {
+                                <td>@Html.ActionLink("Eliminar", "Eliminar", new { id = a.id })</td>
+                            }
+                             
+
                     </tr>
                     }
                     else

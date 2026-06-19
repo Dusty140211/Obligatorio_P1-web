@@ -22,10 +22,10 @@
     @foreach (Cuenta cuenta in Model)
     {
         <tr>
-            <td>@cuenta.ID</td>
+            <td>@cuenta.Id</td>
             <td>@cuenta.MFA</td>
             <td>@cuenta.UCContrase</td>
-            <td></td>
+            <td>@Html.ActionLink("Activos", "ListadoActivos", new {id = cuenta.Titular.Cedula })</td>
         </tr>
     }
 </table>

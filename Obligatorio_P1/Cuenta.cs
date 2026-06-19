@@ -7,15 +7,15 @@ namespace Logica
 {
     public class Cuenta : IComparable<Cuenta>
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public Persona Titular { get; set; }
         public bool MFA { get; set; }
         public DateTime UCContrase { get; set; }
 
 
-        public Cuenta(int id, Persona titular, bool mfa, DateTime ucContraseña)
+        public Cuenta(int idCuenta, Persona titular, bool mfa, DateTime ucContraseña)
         {
-            ID = id;
+            Id = idCuenta   ;
             Titular = titular;
             MFA = mfa;
             UCContrase = ucContraseña;
@@ -23,12 +23,12 @@ namespace Logica
 
         public override string ToString()
         {
-            return $"ID Cuenta: {ID}, Titular: {Titular.Nombre}, MFA Activo: {MFA}, Último cambio de contraseña: {UCContrase.ToShortDateString()}";
+            return $"ID Cuenta: {Id}, Titular: {Titular.Nombre}, MFA Activo: {MFA}, Último cambio de contraseña: {UCContrase.ToShortDateString()}";
         }
 
         public override bool Equals(object? obj)
         {
-            return obj is Cuenta c && ID.Equals(c.ID);
+            return obj is Cuenta c && Id.Equals(c.Id);
         }
 
         public bool EsDeTitular(Persona persona)
@@ -38,7 +38,7 @@ namespace Logica
 
         public int CompareTo(Cuenta c) {
 
-            return ID.CompareTo(c.ID); 
+            return Id.CompareTo(c.Id); 
 
         }
     }

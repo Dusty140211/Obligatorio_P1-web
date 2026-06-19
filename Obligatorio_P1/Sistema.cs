@@ -255,6 +255,17 @@ namespace Logica
 
         }
 
+        public Activo ActivoBuscado(int id) {
+            
+            foreach (Activo a in _activos) {
+                if (a.id == id) {
+                    return a; 
+                }
+                
+            }
+            return null;
+        }
+
 
 
         public Persona login(string email, string pass) {
@@ -269,6 +280,15 @@ namespace Logica
             return null; 
         }
 
+        public void BajaActivo(int id)
+        {
+            Activo a = ActivoBuscado(id);
+            if (a == null) throw new Exception("El activo no existe en el sistema.");
+            // quitar del listado de activos (sólo ese)
+            _activos.Remove(a);
+            // opcional: desvincular su cuenta
+            if (a.Cuenta != null) a.Cuenta = null;
+        }
 
 
     }

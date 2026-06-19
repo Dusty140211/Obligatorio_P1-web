@@ -37,36 +37,6 @@ namespace ObligatorioWeb.Controllers.PersonaCar
             }
         }
 
-
-        public IActionResult ListadoActivos()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult ListadoActivos(string cedula)
-        {
-
-            try
-            {
-                if (HttpContext.Session.GetString("rol") == "OPERADOR")
-                {
-                    cedula = HttpContext.Session.GetString("cedula");
-                    Persona p = s.ObtenerPersona(cedula);
-                    List<Activo> a = s.ObtenerActivosDe(p);
-
-                    return View(a);
-                }
-
-                return View();
-            }
-            catch
-            {
-                ViewBag.Error = "Error al obtener los activos de la persona";
-                return View();
-            }
-        }
-
         public IActionResult Perfil()
         {
             return View();
@@ -78,18 +48,20 @@ namespace ObligatorioWeb.Controllers.PersonaCar
             try
             {
                 Persona p = null;
-                List<Cuenta> cuentas = new List<Cuenta>();
+                if (HttpContext.Session.GetString("rol") != null)
+                {
+                    List<Cuenta> cuentas = new List<Cuenta>();
 
 
-                cedula = HttpContext.Session.GetString("cedula");
-                p = s.ObtenerPersona(cedula);
+                    cedula = HttpContext.Session.GetString("cedula");
+                    p = s.ObtenerPersona(cedula);
 
-                cuentas = s.listarCuenta(p) ?? new List<Cuenta>();
+                    cuentas = s.listarCuenta(p);
 
-
-
-                ViewBag.Cuenta = cuentas;
-                return View(p);
+                    ViewBag.Cuenta = cuentas;
+                    return View(p); 
+                }
+                return View();
 
             }
             catch
@@ -145,7 +117,77 @@ namespace ObligatorioWeb.Controllers.PersonaCar
                 ViewBag.Error = "Error al obtener las cuentas";
                 return View();
             }
+
         }
+
+
+        public IActionResult ListadoActivos()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult ListadoActivos(string id)
+        {
+
+            try
+            {
+               
+                List<Activo> activos;
+
+                var Rols = HttpContext.Session.GetString("rol");
+                if (string.IsNullOrEmpty(Rols)) return View();
+
+                if (HttpContext.Session.GetString("rol") != null)
+                {
+                    if (string.IsNullOrEmpty(id))
+                    {
+                        id = HttpContext.Session.GetString("cedula");
+                    }
+
+                    if (id == null) return View(); 
+
+                    Persona p = s.ObtenerPersona(id);
+                    activos = s.ObtenerActivosDe(p);
+
+                    ViewBag.IsAdmin = HttpContext.Session.GetString("rol") == "ADMINISTRADOR";
+
+                    return View(activos);
+                }
+
+                return View();
+            }
+            catch
+            {
+                ViewBag.Error = "Error al obtener los activos de la persona";
+                return View();
+            }
+        }
+
+        public IActionResult Eliminar(int id)
+        {
+            Activo aBuscada = s.ActivoBuscado(id);
+            if (aBuscada != null) return View(aBuscada);
+            return View();
+        }
+
+        // POST: recibir el id explícitamente
+
+        [HttpPost]
+        public IActionResult Eliminar(int id, bool chequeado)
+        {
+            if (chequeado)
+            {
+                Activo aBuscada = s.ActivoBuscado(id);
+                if (aBuscada != null)
+                {
+                    s.BajaActivo(id);
+                }
+            }
+            return RedirectToAction("ListadoActivos");
+        }
+
+
     }
    
 }
