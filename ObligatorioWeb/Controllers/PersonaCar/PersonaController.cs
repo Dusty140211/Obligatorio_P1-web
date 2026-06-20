@@ -1,5 +1,6 @@
 ﻿using Logica;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Obligatorio_P1;
 
 namespace ObligatorioWeb.Controllers.PersonaCar
@@ -59,7 +60,7 @@ namespace ObligatorioWeb.Controllers.PersonaCar
                     cuentas = s.listarCuenta(p);
 
                     ViewBag.Cuenta = cuentas;
-                    return View(p); 
+                    return View(p);
                 }
                 return View();
 
@@ -74,14 +75,15 @@ namespace ObligatorioWeb.Controllers.PersonaCar
 
         }
 
-        
 
 
-        public IActionResult listarPersonas(){
+
+        public IActionResult listarPersonas()
+        {
 
             try
             {
-                List<Persona> personas; 
+                List<Persona> personas;
 
                 if (HttpContext.Session.GetString("rol") == "ADMINISTRADOR")
                 {
@@ -99,16 +101,19 @@ namespace ObligatorioWeb.Controllers.PersonaCar
             }
         }
 
-        public IActionResult listarCuentas(string id) {
-            try {
-                List <Cuenta> cuentas;
-                if (HttpContext.Session.GetString("rol") == "ADMINISTRADOR") {
-                    
-                   
-                        Persona p = s.ObtenerPersona(id);
-                        cuentas = s.listarCuenta(p);
-                        return View(cuentas);
-                    
+        public IActionResult listarCuentas(string id)
+        {
+            try
+            {
+                List<Cuenta> cuentas;
+                if (HttpContext.Session.GetString("rol") == "ADMINISTRADOR")
+                {
+
+
+                    Persona p = s.ObtenerPersona(id);
+                    cuentas = s.listarCuenta(p);
+                    return View(cuentas);
+
                 }
                 return View();
             }
@@ -132,7 +137,7 @@ namespace ObligatorioWeb.Controllers.PersonaCar
 
             try
             {
-               
+
                 List<Activo> activos;
 
                 var Rols = HttpContext.Session.GetString("rol");
@@ -145,7 +150,7 @@ namespace ObligatorioWeb.Controllers.PersonaCar
                         id = HttpContext.Session.GetString("cedula");
                     }
 
-                    if (id == null) return View(); 
+                    if (id == null) return View();
 
                     Persona p = s.ObtenerPersona(id);
                     activos = s.ObtenerActivosDe(p);
@@ -164,30 +169,54 @@ namespace ObligatorioWeb.Controllers.PersonaCar
             }
         }
 
-        public IActionResult Eliminar(int id)
+
+
+        [HttpGet]
+        public IActionResult ListadoActivosAdmin(string id)
+        {
+            try
+            {
+                var rol = HttpContext.Session.GetString("rol");
+                if (string.IsNullOrEmpty(rol)) return View();
+
+                if (string.IsNullOrEmpty(id))
+                    id = HttpContext.Session.GetString("cedula");
+
+                if (id == null) return View();
+
+                Persona p = s.ObtenerPersona(id);
+                List<Activo> activos = s.ObtenerActivosDe(p);
+
+                ViewBag.IsAdmin = rol == "ADMINISTRADOR";
+                ViewBag.CedulaPersona = id;  // ← NUEVO
+
+                return View(activos);
+            }
+            catch
+            {
+                ViewBag.Error = "Error al obtener los activos de la persona";
+                return View();
+            }
+        }
+
+        public IActionResult Eliminar(int id, string cedulaPersona)
         {
             Activo aBuscada = s.ActivoBuscado(id);
+            ViewBag.CedulaPersona = cedulaPersona;  // ← NUEVO
             if (aBuscada != null) return View(aBuscada);
             return View();
         }
 
-        // POST: recibir el id explícitamente
-
         [HttpPost]
-        public IActionResult Eliminar(int id, bool chequeado)
+        public IActionResult Eliminar(int id, bool chequeado, string cedulaPersona)
         {
             if (chequeado)
             {
                 Activo aBuscada = s.ActivoBuscado(id);
                 if (aBuscada != null)
-                {
                     s.BajaActivo(id);
-                }
             }
-            return RedirectToAction("ListadoActivos");
+            return RedirectToAction("ListadoActivosAdmin", new { id = cedulaPersona });
         }
-
-
     }
-   
 }

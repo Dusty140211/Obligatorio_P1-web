@@ -197,6 +197,9 @@ namespace Logica
             return resultado;
         }
 
+     
+
+
         // Metodo apra obtener todas las personas
 
         public List<Persona> listarPersonas()
@@ -282,12 +285,17 @@ namespace Logica
 
         public void BajaActivo(int id)
         {
-            Activo a = ActivoBuscado(id);
-            if (a == null) throw new Exception("El activo no existe en el sistema.");
+            
+           
             // quitar del listado de activos (sólo ese)
-            _activos.Remove(a);
+            foreach (Activo a in _activos) {
+                if (a.Cuenta.Id == id) {
+                    _activos.Remove(a); 
+                }
+            }
+
             // opcional: desvincular su cuenta
-            if (a.Cuenta != null) a.Cuenta = null;
+           
         }
 
 

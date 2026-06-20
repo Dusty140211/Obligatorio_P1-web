@@ -27,22 +27,23 @@
                 
                 @foreach (Activo a in Model)
                 {
-                    @if(a != null){
-                    <tr>
-                        <td>@a.id</td>
-                        <td>@a.Name</td>
-                        <td>@a.Tipo</td>
-                        <td>@a.Criticidad</td>
-                        <td>@a.Backup</td> 
-
-                    </tr>
+                    @if (a != null)
+                    {
+                        <tr>
+                            <td>@a.id</td>
+                            <td>@a.Name</td>
+                            <td>@a.Tipo</td>
+                            <td>@a.Criticidad</td>
+                            <td>@a.Backup</td>
+                            <td>@Html.ActionLink("Eliminar", "Eliminar", new { id = a.id, cedulaPersona = ViewBag.CedulaPersona })</td>
+                        </tr>
                     }
                     else
-                {
-                    <tr>
+                    {
+                        <tr>
                             <td colspan="4">@ViewBag.Error</td>
-                    </tr>
-                }
+                        </tr>
+                    }
                 }
             </tbody>
         </table>

@@ -4,6 +4,7 @@
 
 <form method="post">
     <input type="hidden" asp-for="id" />
+    <input type="hidden" name="cedulaPersona" value="@ViewBag.CedulaPersona" />
     <p><strong>Activo:</strong> @Model?.Name</p>
     <p><strong>ID:</strong> @Model?.id</p>
 
@@ -13,4 +14,3 @@
     <input type="submit" value="Eliminar" />
 </form>
 
-<a asp-action="ListadoActivos" asp-controller="Persona">Volver a listado</a>
