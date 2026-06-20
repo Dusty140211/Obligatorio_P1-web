@@ -285,17 +285,9 @@ namespace Logica
 
         public void BajaActivo(int id)
         {
-            
-           
-            // quitar del listado de activos (sólo ese)
-            foreach (Activo a in _activos) {
-                if (a.Cuenta.Id == id) {
-                    _activos.Remove(a); 
-                }
-            }
-
-            // opcional: desvincular su cuenta
-           
+            Activo a = ActivoBuscado(id);
+            if (a == null) throw new Exception("El activo no existe.");
+            a.Cuenta = null; // ← se desvincula de la cuenta, no se borra
         }
 
 

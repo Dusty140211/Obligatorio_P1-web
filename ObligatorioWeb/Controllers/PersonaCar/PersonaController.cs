@@ -170,6 +170,11 @@ namespace ObligatorioWeb.Controllers.PersonaCar
         }
 
 
+        public IActionResult ListadoActivosAdmin()
+        {
+            return View();
+        }
+
 
         [HttpGet]
         public IActionResult ListadoActivosAdmin(string id)
@@ -207,14 +212,13 @@ namespace ObligatorioWeb.Controllers.PersonaCar
             return View();
         }
 
+        
         [HttpPost]
-        public IActionResult Eliminar(int id, bool chequeado, string cedulaPersona)
+        public IActionResult Eliminar(int id, string chequeado, string cedulaPersona)
         {
-            if (chequeado)
+            if (chequeado == "true")
             {
-                Activo aBuscada = s.ActivoBuscado(id);
-                if (aBuscada != null)
-                    s.BajaActivo(id);
+                s.BajaActivo(id);
             }
             return RedirectToAction("ListadoActivosAdmin", new { id = cedulaPersona });
         }
