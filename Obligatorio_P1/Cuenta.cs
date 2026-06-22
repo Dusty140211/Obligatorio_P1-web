@@ -13,6 +13,7 @@ namespace Logica
         public bool MFA { get; set; }
         public DateTime UCContrase { get; set; }
 
+        public Cuenta() { }
 
         public Cuenta(Persona titular, bool mfa, DateTime ucContraseña)
         {

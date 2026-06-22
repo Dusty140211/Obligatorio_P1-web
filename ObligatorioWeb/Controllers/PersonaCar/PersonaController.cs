@@ -238,12 +238,13 @@ namespace ObligatorioWeb.Controllers.PersonaCar
             }
         }
 
-        public IActionResult CrearCuenta(string id) 
+        public IActionResult CrearCuenta(int id, string cedulaPersona) 
         {
             try
             {
-                Persona pBuscada = s.ObtenerPersona(id);
-                if (pBuscada != null) return View(pBuscada);
+                Activo aBuscada = s.ActivoBuscado(id);
+                ViewBag.CedulaPersona = cedulaPersona;
+                if (aBuscada != null) return View(aBuscada);
                 return View();
             }
             catch
@@ -253,13 +254,13 @@ namespace ObligatorioWeb.Controllers.PersonaCar
             }
         }
         [HttpPost]
-        public IActionResult CrearCuenta(Cuenta c,string id, string chequeado) {
+        public IActionResult CrearCuenta(Cuenta c,string id, string chequeado, string cedulaPersona) {
             if (chequeado == "true") {
                 Persona pBuscada = s.ObtenerPersona(id);
                 c.Titular = pBuscada;
                 s.altaCuenta(c);
             }
-            return RedirectToAction("listarCuenta");
+            return RedirectToAction("listarCuentas", new {id = cedulaPersona});
         
         }
     }

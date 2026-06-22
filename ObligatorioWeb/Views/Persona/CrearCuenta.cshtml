@@ -5,23 +5,21 @@
 }
 @using Logica;
 @using Obligatorio_P1
-@model Cuenta;
+@model Persona;
 
 <form method="post">
 
     <h1>REGISTRESE</h1>
     <p>Ingrese sus datos</p>
     <br />
-    <label for="MFA">MFA: </label>
-    <input type="checkbox" name="MFA" value="@Model.MFA" />
-    <input type="checkbox" name="MFA" value="@Model.MFA" />
+    <label>MFA:</label>
+    <input type="checkbox" name="MFA" value="true" />
     <br />
-    <label for="UCContrase">Email: </label>
-    <input type="datetime" name="UCContrase" value="@Model.UCContrase" />
+    <label for="UCContrase">Ultimo cambio de contraseña </label>
+    <input type="date" name="UCContrase" />
     <br />
     <input type="submit" />
 
-    
 
 </form>
 @ViewBag.Error

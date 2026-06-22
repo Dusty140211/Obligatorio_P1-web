@@ -76,18 +76,18 @@ namespace Logica
             altaPersona(new Persona("11000000", "Javier Morales", "javier.morales@gmail.com", "Javier1234", 99100010, Cargo.ADMINISTRADOR));
 
             // CUENTAS
-            altaCuenta(new Cuenta(1, _personas[0], true, new DateTime(2023, 1, 10)));
-            altaCuenta(new Cuenta(2, _personas[1], true, new DateTime(2023, 2, 12)));
-            altaCuenta(new Cuenta(3, _personas[2], true, new DateTime(2023, 3, 14)));
-            altaCuenta(new Cuenta(4, _personas[3], true, new DateTime(2023, 4, 16)));
-            altaCuenta(new Cuenta(5, _personas[4], true, new DateTime(2023, 5, 18)));
-            altaCuenta(new Cuenta(6, _personas[5], true, new DateTime(2023, 6, 20)));
-            altaCuenta(new Cuenta(7, _personas[6], true, new DateTime(2023, 7, 22)));
-            altaCuenta(new Cuenta(8, _personas[7], true, new DateTime(2023, 8, 24)));
-            altaCuenta(new Cuenta(9, _personas[8], true, new DateTime(2023, 9, 26)));
-            altaCuenta(new Cuenta(10, _personas[9], true, new DateTime(2023, 10, 28)));
-            altaCuenta(new Cuenta(11, _personas[0], true, new DateTime(2023, 11, 5)));
-            altaCuenta(new Cuenta(12, _personas[1], true, new DateTime(2023, 12, 8)));
+            altaCuenta(new Cuenta( _personas[0], true, new DateTime(2023, 1, 10)));
+            altaCuenta(new Cuenta( _personas[1], true, new DateTime(2023, 2, 12)));
+            altaCuenta(new Cuenta( _personas[2], true, new DateTime(2023, 3, 14)));
+            altaCuenta(new Cuenta(_personas[3], true, new DateTime(2023, 4, 16)));
+            altaCuenta(new Cuenta(_personas[4], true, new DateTime(2023, 5, 18)));
+            altaCuenta(new Cuenta(_personas[5], true, new DateTime(2023, 6, 20)));
+            altaCuenta(new Cuenta(_personas[6], true, new DateTime(2023, 7, 22)));
+            altaCuenta(new Cuenta(_personas[7], true, new DateTime(2023, 8, 24)));
+            altaCuenta(new Cuenta(_personas[8], true, new DateTime(2023, 9, 26)));
+            altaCuenta(new Cuenta(_personas[9], true, new DateTime(2023, 10, 28)));
+            altaCuenta(new Cuenta(_personas[0], true, new DateTime(2023, 11, 5)));
+            altaCuenta(new Cuenta(_personas[1], true, new DateTime(2023, 12, 8)));
 
             // ACTIVOS
             altaActivo(new Activo("PC Desarrollo 1", tipoDeActivo.PC, 2, _cuentas[0], true));
