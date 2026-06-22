@@ -19,6 +19,7 @@
                     <th>Telefono</th>
                     <th>Cargo</th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -33,6 +34,14 @@
                         <td>@p.Telefono</td>
                         <td>@p.Cargo</td>
                         <td>@Html.ActionLink("Cuentas", "listarCuentas", new {id = p.Cedula })</td>
+                            <td>
+                            @if (p.Cargo == Logica.Cargo.OPERADOR)
+                            {
+                               @Html.ActionLink("Crear Cuenta", "CrearCuenta", new { id = p.Cedula })
+
+                            }
+                            </td>
+                          
 
 
                     </tr>
@@ -47,3 +56,4 @@
             </tbody>
         </table>
     </form>
+    @ViewBag.Error

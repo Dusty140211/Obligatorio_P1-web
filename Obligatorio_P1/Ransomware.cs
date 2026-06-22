@@ -24,5 +24,24 @@ namespace Logica
                    $"Datos encriptados: {Encriptados}, Hubo exfiltración: {Exfiltraciones}";
         }
 
+        public override int Severidad()
+        {
+            int Resultado = base.Severidad();
+
+            if (Encriptados) {
+                Resultado = Resultado + 20;
+            }
+            if (Exfiltraciones) {
+                Resultado = Resultado + 25; 
+            }
+            if (ActivoAfectado.Backup) {
+                Resultado = Resultado - 15; 
+            }
+
+            return Resultado; 
+            
+
+        }
+
     }
 }

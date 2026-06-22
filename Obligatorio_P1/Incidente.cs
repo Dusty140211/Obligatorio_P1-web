@@ -44,6 +44,21 @@ namespace Logica
                    $"Activo afectado: {ActivoAfectado.ToString()}";
         }
 
+        public virtual int Severidad() {
+
+            int resultado = 0;
+            if (resultado <= 100)
+            {
+                resultado = (Impacto * 12) + (Probabilidad * 8);
+                return resultado;
+            }
+            else
+            {
+                throw new Exception("la operacion no puede superar el numero 100");
+            }
+
+        }
+
         public bool AfectaAPersona(Persona persona)
         {
             return ActivoAfectado != null && ActivoAfectado.PerteneceAPersona(persona);
@@ -53,6 +68,8 @@ namespace Logica
         {
             return obj is Incidente inc && ID.Equals(inc.ID);
         }
+
+       
         
     }
 }

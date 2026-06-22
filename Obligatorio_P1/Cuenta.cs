@@ -7,15 +7,16 @@ namespace Logica
 {
     public class Cuenta : IComparable<Cuenta>
     {
+        public static int contadorid = 0;
         public int Id { get; set; }
         public Persona Titular { get; set; }
         public bool MFA { get; set; }
         public DateTime UCContrase { get; set; }
 
 
-        public Cuenta(int idCuenta, Persona titular, bool mfa, DateTime ucContraseña)
+        public Cuenta(Persona titular, bool mfa, DateTime ucContraseña)
         {
-            Id = idCuenta   ;
+            Id = contadorid++;
             Titular = titular;
             MFA = mfa;
             UCContrase = ucContraseña;

@@ -206,21 +206,61 @@ namespace ObligatorioWeb.Controllers.PersonaCar
 
         public IActionResult Eliminar(int id, string cedulaPersona)
         {
-            Activo aBuscada = s.ActivoBuscado(id);
-            ViewBag.CedulaPersona = cedulaPersona;  // ← NUEVO
-            if (aBuscada != null) return View(aBuscada);
-            return View();
+            try
+            {
+                Activo aBuscada = s.ActivoBuscado(id);
+                ViewBag.CedulaPersona = cedulaPersona;
+                if (aBuscada != null) return View(aBuscada);
+                return View();
+            }
+            catch
+            {
+                ViewBag.Error = "Error al obtener los activos de la persona";
+                return View();
+            }
         }
 
         
         [HttpPost]
         public IActionResult Eliminar(int id, string chequeado, string cedulaPersona)
         {
-            if (chequeado == "true")
+            try
             {
-                s.BajaActivo(id);
+                if (chequeado == "true")
+                {
+                    s.BajaActivo(id);
+                }
+                return RedirectToAction("ListadoActivosAdmin", new { id = cedulaPersona });
             }
-            return RedirectToAction("ListadoActivosAdmin", new { id = cedulaPersona });
+            catch {
+                ViewBag.Error = "Error al obtener los activos de la persona";
+                return View();
+            }
+        }
+
+        public IActionResult CrearCuenta(string id) 
+        {
+            try
+            {
+                Persona pBuscada = s.ObtenerPersona(id);
+                if (pBuscada != null) return View(pBuscada);
+                return View();
+            }
+            catch
+            {
+                ViewBag.Error = "Error al obtener los activos de la persona";
+                return View();
+            }
+        }
+        [HttpPost]
+        public IActionResult CrearCuenta(Cuenta c,string id, string chequeado) {
+            if (chequeado == "true") {
+                Persona pBuscada = s.ObtenerPersona(id);
+                c.Titular = pBuscada;
+                s.altaCuenta(c);
+            }
+            return RedirectToAction("listarCuenta");
+        
         }
     }
 }

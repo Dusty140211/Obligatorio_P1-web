@@ -28,6 +28,10 @@ namespace Logica
                    $"Canal usado: {CanalUsado}, Credenciales expuestas: {Credenciales}, Transferencias realizadas: {Transferencias}";
         }
 
+        public override int Severidad()
+        {
+            return base.Severidad();
+        }
 
         public void validarCanal() 
         { 

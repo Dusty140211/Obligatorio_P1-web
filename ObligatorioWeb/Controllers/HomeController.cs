@@ -36,14 +36,14 @@ namespace ObligatorioWeb.Controllers
 
                 }
                 else {
-                    ViewBag.texto = "Credenciales incorrectas";
+                    ViewBag.Error = "Credenciales incorrectas";
                     return View();
                 }
 
             }
             catch (Exception ex)
             {
-                ViewBag.texto = ex.Message;
+                ViewBag.Error = ex.Message;
                 return View();
             }
         }
