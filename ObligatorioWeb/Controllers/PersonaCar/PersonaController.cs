@@ -126,52 +126,44 @@ namespace ObligatorioWeb.Controllers.PersonaCar
         }
 
 
-        public IActionResult ListadoActivos()
-        {
-            return View();
-        }
+      
 
         [HttpGet]
-      /*  public IActionResult ListadoActivos(string id)
+        public IActionResult ListadoActivos()
         {
-
             try
             {
+                string rol = HttpContext.Session.GetString("rol");
+                string cedula = HttpContext.Session.GetString("cedula");
 
-                List<Activo> activos;
+                if (string.IsNullOrEmpty(rol) || string.IsNullOrEmpty(cedula))
+                    return RedirectToAction("Login");
 
-                var Rols = HttpContext.Session.GetString("rol");
-                if (string.IsNullOrEmpty(Rols)) return View();
+                Persona p = s.ObtenerPersona(cedula);
 
-                if (HttpContext.Session.GetString("rol") != null)
+                if (p == null)
                 {
-                    if (string.IsNullOrEmpty(id))
-                    {
-                        id = HttpContext.Session.GetString("cedula");
-                    }
-
-                    if (id == null) return View();
-
-                    Persona p = s.ObtenerPersona(id);
-                    activos = s.ObtenerActivosDe(p);
-
-                    ViewBag.IsAdmin = HttpContext.Session.GetString("rol") == "ADMINISTRADOR";
-
-                    return View(activos);
+                    ViewBag.Error = "No se encontró la persona";
+                    return View(new List<Activo>());
                 }
 
-                return View();
+                List<Activo> activos = s.ObtenerActivosDe(p);
+
+                ViewBag.IsAdmin = false;
+                ViewBag.CedulaPersona = cedula;
+
+                return View(activos);
             }
-            catch
+            catch (Exception ex)
             {
-                ViewBag.Error = "Error al obtener los activos de la persona";
-                return View();
+                ViewBag.Error = ex.Message;
+                return View(new List<Activo>());
             }
         }
-      */
 
 
-       
+
+
 
         [HttpGet]
         public IActionResult ListadoActivosAdmin(int id)
@@ -265,44 +257,65 @@ namespace ObligatorioWeb.Controllers.PersonaCar
 
         }
 
-        public IActionResult CrearActivo(string cedulaPersona) {
-            try
-            {
+        [HttpGet]
+        public IActionResult CrearActivo(int idCuenta, string cedulaPersona)
+        {
+            ViewBag.IdCuenta = idCuenta;
+            ViewBag.CedulaPersona = cedulaPersona;
 
-                ViewBag.CedulaPersona = cedulaPersona;
-
-                return View(new Activo());
-
-            }
-            catch
-            {
-                ViewBag.Error = "Error al obtener los activos de la persona";
-                return View();
-            }
+            return View(new Activo());
         }
 
         [HttpPost]
-             public IActionResult CrearActivo(Activo a, string id, tipoDeActivo tipo)
+        public IActionResult CrearActivo(Activo a, int idCuenta, string cedulaPersona)
         {
             try
             {
-                Persona pBuscada = s.ObtenerPersona(id);
+                Cuenta cuenta = s.ObtenerCuenta(idCuenta);
 
-
-                a.Cuenta.Titular = pBuscada;
+                a.Cuenta = cuenta;
 
                 s.altaActivo(a);
 
-
-                return RedirectToAction("listarCuentas", new { id = id });
+                return RedirectToAction("ListadoActivosAdmin", new { id = idCuenta });
             }
-            catch
+            catch (Exception ex)
             {
-                ViewBag.Error = "Error al obtener los activos de la persona";
-                return View();
+                ViewBag.Error = ex.Message;
+                ViewBag.IdCuenta = idCuenta;
+                ViewBag.CedulaPersona = cedulaPersona;
+                return View(a);
             }
-
         }
+
+        [HttpGet]
+        public IActionResult ListadoIncidentes()
+        {
+            try
+            {
+                string rol = HttpContext.Session.GetString("rol");
+                string cedula = HttpContext.Session.GetString("cedula");
+
+                if (string.IsNullOrEmpty(rol) || string.IsNullOrEmpty(cedula))
+                    return RedirectToAction("Login");
+                if (HttpContext.Session.GetString("rol") == "ADMINISTRADOR")
+                {
+
+                    List<Incidente> inc = s.ObtenerIncidentes();
+
+     
+                    return View(inc);
+                }
+                return View();
+                
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View(new List<Activo>());
+            }
+        }
+
 
     }
 }

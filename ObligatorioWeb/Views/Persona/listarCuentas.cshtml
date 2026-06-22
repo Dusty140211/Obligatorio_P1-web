@@ -26,11 +26,13 @@
             <td>@cuenta.Id</td>
             <td>@cuenta.MFA</td>
             <td>@cuenta.UCContrase</td>
-            <td>@Html.ActionLink("Activos", "ListadoActivosAdmin", new {id = cuenta.Titular.Cedula })</td>
+            <td>
+                @Html.ActionLink("Activos", "ListadoActivosAdmin",new { id = cuenta.Id })
+            </td>
             <td>
             @if (cuenta.Titular.Cargo == Logica.Cargo.OPERADOR)
             {
-                @Html.ActionLink("Crear Activo", "CrearActivo", new { id = cuenta.Titular.Cedula })
+                @Html.ActionLink("Crear Activo", "CrearActivo", new { idCuenta = cuenta.Id, cedulaPersona = cuenta.Titular.Cedula })
 
             }
             </td>

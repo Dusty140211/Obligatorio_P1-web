@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Logica
 {
-    public abstract class Incidente
+    public abstract class Incidente : IComparable<Incidente>
     {
         public int ID { get; set; }
         public DateTime FechaReportado { get; set; }
@@ -69,7 +69,12 @@ namespace Logica
             return obj is Incidente inc && ID.Equals(inc.ID);
         }
 
-       
-        
+        public int CompareTo(Incidente i)
+        { 
+
+            return -Severidad().CompareTo(i.Severidad());
+
+        }
+
     }
 }

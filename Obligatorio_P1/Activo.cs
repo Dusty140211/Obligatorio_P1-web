@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Logica
 {
-    public class Activo
+    public class Activo : IComparable<Activo>
     {
         private static int _contador = 0;
         public int id { get; set; }
@@ -56,6 +56,13 @@ namespace Logica
         public override bool Equals(object? obj)
         {
             return obj is Activo a && id.Equals(a.id);
+        }
+
+        public int CompareTo(Activo a)
+        {
+
+            return id.CompareTo(a.id);
+
         }
     }
 }

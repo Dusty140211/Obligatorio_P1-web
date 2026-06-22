@@ -151,6 +151,7 @@ namespace Logica
 
         public void altaIncidente(Incidente i)
         {
+            
             if (_incidentes.Contains(i)) throw new Exception("El incidente ya existe en el sistema.");
             else _incidentes.Add(i);
         }
@@ -202,6 +203,25 @@ namespace Logica
             return resultado;
         }
 
+        public List<Activo> ObtenerActivosDe(Persona persona)
+        {
+            List<Activo> resultado = new List<Activo>();
+
+            foreach (Activo act in _activos)
+            {
+                
+                if (act.PerteneceAPersona(persona))
+                {
+                    
+                    resultado.Add(act);
+                }
+            }
+            resultado.Sort();
+
+            return resultado;
+        }
+
+
         public Activo ObtenerActivo(int id) {
             foreach (Activo a in _activos) {
                 if (a != null || a.Cuenta.Id == id)
@@ -212,7 +232,26 @@ namespace Logica
             }
             return null; 
         }
-     
+
+        public Cuenta ObtenerCuenta(int id)
+        {
+            foreach (Cuenta c in _cuentas)
+            {
+                if (c.Id == id)
+                {
+                    return c;
+                }
+            }
+
+            return null;
+        }
+
+        public List<Incidente> ObtenerIncidentes()
+        {
+            _incidentes.Sort();
+            return _incidentes; 
+        }
+
 
 
         // Metodo apra obtener todas las personas
