@@ -35,7 +35,8 @@ namespace Logica
 
         public bool EsDeTitular(Persona persona)
         {
-            return Titular != null && Titular.Equals(persona);
+            return Titular != null &&
+                   Titular.Cedula == persona.Cedula;
         }
 
         public int CompareTo(Cuenta c) {

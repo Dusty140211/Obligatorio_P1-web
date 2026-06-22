@@ -186,17 +186,32 @@ namespace Logica
             return resultado;
         }
 
-        public List<Activo> ObtenerActivosDe(Persona persona)
+        public List<Activo> ObtenerActivosCuenta(int idCuenta)
         {
             List<Activo> resultado = new List<Activo>();
+
             foreach (Activo act in _activos)
             {
-              if(act.PerteneceAPersona(persona))
+                if (act.Cuenta != null &&
+                    act.Cuenta.Id == idCuenta)
+                {
                     resultado.Add(act);
+                }
             }
+
             return resultado;
         }
 
+        public Activo ObtenerActivo(int id) {
+            foreach (Activo a in _activos) {
+                if (a != null || a.Cuenta.Id == id)
+                {
+                    return a;
+                }
+               
+            }
+            return null; 
+        }
      
 
 

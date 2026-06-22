@@ -5,11 +5,11 @@
 }
 @using Logica;
 @using Obligatorio_P1
-@model Persona;
+@model Cuenta;
 
 <form method="post">
 
-    <h1>REGISTRESE</h1>
+    <h1>Crear Cuenta</h1>
     <p>Ingrese sus datos</p>
     <br />
     <label>MFA:</label>
@@ -19,7 +19,7 @@
     <input type="date" name="UCContrase" />
     <br />
     <input type="submit" />
-
+    <br />
+    @ViewBag.Error
 
 </form>
-@ViewBag.Error

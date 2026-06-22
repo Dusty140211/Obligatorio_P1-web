@@ -18,6 +18,7 @@
         <th>ID</th>
         <th>MFA</th>
         <th>Ultimo cambio de contraseña</th>
+        <th></th>
     </tr>
     @foreach (Cuenta cuenta in Model)
     {
@@ -26,6 +27,16 @@
             <td>@cuenta.MFA</td>
             <td>@cuenta.UCContrase</td>
             <td>@Html.ActionLink("Activos", "ListadoActivosAdmin", new {id = cuenta.Titular.Cedula })</td>
+            <td>
+            @if (cuenta.Titular.Cargo == Logica.Cargo.OPERADOR)
+            {
+                @Html.ActionLink("Crear Activo", "CrearActivo", new { id = cuenta.Titular.Cedula })
+
+            }
+            </td>
+
+        
+        
         </tr>
     }
 </table>

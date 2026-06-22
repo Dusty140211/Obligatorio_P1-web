@@ -18,6 +18,7 @@
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Tipo de Activo</th>
+                    <th>cuenta</th>
                     <th>Criticidad</th>
                     <th>Backup</th>
                     <th></th>
@@ -33,6 +34,7 @@
                             <td>@a.id</td>
                             <td>@a.Name</td>
                             <td>@a.Tipo</td>
+                            <td>@a.Cuenta.Id</td>
                             <td>@a.Criticidad</td>
                             <td>@a.Backup</td>
                             <td>@Html.ActionLink("Eliminar", "Eliminar", new { id = a.id, cedulaPersona = ViewBag.CedulaPersona })</td>

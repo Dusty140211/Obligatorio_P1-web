@@ -132,7 +132,7 @@ namespace ObligatorioWeb.Controllers.PersonaCar
         }
 
         [HttpGet]
-        public IActionResult ListadoActivos(string id)
+      /*  public IActionResult ListadoActivos(string id)
         {
 
             try
@@ -168,29 +168,23 @@ namespace ObligatorioWeb.Controllers.PersonaCar
                 return View();
             }
         }
+      */
 
 
-        public IActionResult ListadoActivosAdmin()
-        {
-            return View();
-        }
-
+       
 
         [HttpGet]
-        public IActionResult ListadoActivosAdmin(string id)
+        public IActionResult ListadoActivosAdmin(int id)
         {
             try
             {
                 var rol = HttpContext.Session.GetString("rol");
                 if (string.IsNullOrEmpty(rol)) return View();
 
-                if (string.IsNullOrEmpty(id))
-                    id = HttpContext.Session.GetString("cedula");
+               
 
-                if (id == null) return View();
-
-                Persona p = s.ObtenerPersona(id);
-                List<Activo> activos = s.ObtenerActivosDe(p);
+                List<Activo> activos = s.ObtenerActivosCuenta(id);
+            
 
                 ViewBag.IsAdmin = rol == "ADMINISTRADOR";
                 ViewBag.CedulaPersona = id;  // ← NUEVO
@@ -220,7 +214,7 @@ namespace ObligatorioWeb.Controllers.PersonaCar
             }
         }
 
-        
+
         [HttpPost]
         public IActionResult Eliminar(int id, string chequeado, string cedulaPersona)
         {
@@ -238,14 +232,15 @@ namespace ObligatorioWeb.Controllers.PersonaCar
             }
         }
 
-        public IActionResult CrearCuenta(int id, string cedulaPersona) 
+        public IActionResult CrearCuenta(string cedulaPersona)
         {
             try
             {
-                Activo aBuscada = s.ActivoBuscado(id);
+
                 ViewBag.CedulaPersona = cedulaPersona;
-                if (aBuscada != null) return View(aBuscada);
-                return View();
+
+                return View(new Cuenta());
+
             }
             catch
             {
@@ -254,14 +249,61 @@ namespace ObligatorioWeb.Controllers.PersonaCar
             }
         }
         [HttpPost]
-        public IActionResult CrearCuenta(Cuenta c,string id, string chequeado, string cedulaPersona) {
-            if (chequeado == "true") {
+        public IActionResult CrearCuenta(Cuenta c, string id) {
+            try
+            {
                 Persona pBuscada = s.ObtenerPersona(id);
                 c.Titular = pBuscada;
                 s.altaCuenta(c);
+
+                return RedirectToAction("listarCuentas", new { id = id });
             }
-            return RedirectToAction("listarCuentas", new {id = cedulaPersona});
-        
+            catch {
+                ViewBag.Error = "Error al obtener los activos de la persona";
+                return View();
+            }
+
         }
+
+        public IActionResult CrearActivo(string cedulaPersona) {
+            try
+            {
+
+                ViewBag.CedulaPersona = cedulaPersona;
+
+                return View(new Activo());
+
+            }
+            catch
+            {
+                ViewBag.Error = "Error al obtener los activos de la persona";
+                return View();
+            }
+        }
+
+        [HttpPost]
+             public IActionResult CrearActivo(Activo a, string id, tipoDeActivo tipo)
+        {
+            try
+            {
+                Persona pBuscada = s.ObtenerPersona(id);
+
+
+                a.Cuenta.Titular = pBuscada;
+
+                s.altaActivo(a);
+
+
+                return RedirectToAction("listarCuentas", new { id = id });
+            }
+            catch
+            {
+                ViewBag.Error = "Error al obtener los activos de la persona";
+                return View();
+            }
+
+        }
+
     }
 }
+
