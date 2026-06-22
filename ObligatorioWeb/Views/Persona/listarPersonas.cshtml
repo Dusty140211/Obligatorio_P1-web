@@ -33,11 +33,11 @@
                         <td>@p.Email</td>
                         <td>@p.Telefono</td>
                         <td>@p.Cargo</td>
-                        <td>@Html.ActionLink("Cuentas", "listarCuentas", new {id = p.Cedula })</td>
+                        <td>@Html.ActionLink("Cuentas", "listarCuentas", "Cuenta", new {id = p.Cedula })</td>
                             <td>
                             @if (p.Cargo == Logica.Cargo.OPERADOR)
                             {
-                               @Html.ActionLink("Crear Cuenta", "CrearCuenta", new { id = p.Cedula })
+                               @Html.ActionLink("Crear Cuenta", "CrearCuenta", "Cuenta", new { id = p.Cedula })
 
                             }
                             </td>

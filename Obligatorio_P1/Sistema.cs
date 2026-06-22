@@ -303,7 +303,7 @@ namespace Logica
             {
                 p.validacion();
                 if (Personas.Contains(p)) throw new Exception("La persona ya existe en el sistema.");
-                else _personas.Add(p);
+                _personas.Add(p);
             }
             else
             {
