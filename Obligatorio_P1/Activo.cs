@@ -17,6 +17,7 @@ namespace Logica
 
         public Activo(){
             id = _contador++;
+
         }
 
         public Activo(string nombre, tipoDeActivo tipo, int criticidad, Cuenta cuenta, bool backup)

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Logica
 {
-    public class Cuenta : IComparable<Cuenta>
+    public class Cuenta 
     {
         public static int contadorid = 0;
         public int Id { get; }
@@ -16,6 +16,7 @@ namespace Logica
         public Cuenta() 
         {
             Id = contadorid++;
+            UCContrase = DateTime.Now; 
         }
 
         public Cuenta(Persona titular, bool mfa, DateTime ucContraseña)
@@ -42,10 +43,6 @@ namespace Logica
                    Titular.Cedula == persona.Cedula;
         }
 
-        public int CompareTo(Cuenta c) {
-
-            return Id.CompareTo(c.Id); 
-
-        }
+       
     }
 }

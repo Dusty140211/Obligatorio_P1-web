@@ -25,7 +25,7 @@
         <tr>
             <td>@cuenta.Id</td>
             <td>@cuenta.MFA</td>
-            <td>@cuenta.UCContrase</td>
+            <td>@cuenta.UCContrase.ToString("dd/MM/yyyy")</td>
             <td>
                 @Html.ActionLink("Activos", "ListadoActivosAdmin", "Activo",new { id = cuenta.Id })
             </td>
