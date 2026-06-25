@@ -101,25 +101,6 @@ namespace ObligatorioWeb.Controllers.PersonaCar
             }
         }
 
-
-
-      
-
-
-
-
-
-
-       
-
-        
-
-       
-
-        
-        
-
-
     }
 }
 

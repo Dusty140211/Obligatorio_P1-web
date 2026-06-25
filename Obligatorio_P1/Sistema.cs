@@ -151,42 +151,22 @@ namespace Logica
 
         public void altaIncidente(Incidente i)
         {
-            
+            i.Validacion(); 
             if (_incidentes.Contains(i)) throw new Exception("El incidente ya existe en el sistema.");
             else _incidentes.Add(i);
         }
 
         public void altaActivo(Activo a)
         {
+            a.validacion();
             if (_activos.Contains(a)) throw new Exception("El activo ya existe en el sistema.");
             else _activos.Add(a);
         }
 
 
+        
 
-        // a
-        // ESTE METODO RECORRE LA LISTA DE ACTIVOS Y POR CADA ACTIVO RECORRE LA LISTA DE PERSONAS, SI EL ACTIVO PERTENECE A LA PERSONA, SE AGREGA A LA LISTA QUE SE DEVOLVERA AL FINAL, ESTA LISTA CONTENDRA LOS ACTIVOS QUE TIENEN PERSONAS ASOCIADAS
-
-
-        public List<Persona> personasConActivosAgrupadas()
-        {
-            List<Persona> resultado = new List<Persona>();
-
-            foreach (Persona persona in _personas)
-            {
-                foreach (Activo act in _activos)  
-                {
-                    if (act.PerteneceAPersona(persona))
-                    {
-                        resultado.Add(persona);
-                        break;
-                    }
-                }
-            }
-
-            return resultado;
-        }
-
+        // Obtiene los activos de una cuenta
         public List<Activo> ObtenerActivosCuenta(int idCuenta)
         {
             List<Activo> resultado = new List<Activo>();
@@ -203,6 +183,7 @@ namespace Logica
             return resultado;
         }
 
+        //Obtiene los activos de una persona, si no tiene activos devuelve una lista vacia
         public List<Activo> ObtenerActivosDe(Persona persona)
         {
             List<Activo> resultado = new List<Activo>();
@@ -221,10 +202,10 @@ namespace Logica
             return resultado;
         }
 
-
+        // metodo que obtiene un activo, si no lo encuentra devuelve null
         public Activo ObtenerActivo(int id) {
             foreach (Activo a in _activos) {
-                if (a != null || a.Cuenta.Id == id)
+                if (a != null && a.Cuenta.Id == id)
                 {
                     return a;
                 }
@@ -233,11 +214,12 @@ namespace Logica
             return null; 
         }
 
+        // metodo que obtiene una cuenta, si no lo encuentra devuelve null
         public Cuenta ObtenerCuenta(int id)
         {
             foreach (Cuenta c in _cuentas)
             {
-                if (c.Id == id)
+                if (c != null && c.Id == id)
                 {
                     return c;
                 }
@@ -246,6 +228,7 @@ namespace Logica
             return null;
         }
 
+        //Obtiene los incidentes de un activo, si no tiene incidentes devuelve una lista vacia
         public List<Incidente> ObtenerIncidentes()
         {
             _incidentes.Sort();
@@ -254,7 +237,7 @@ namespace Logica
 
 
 
-        // Metodo apra obtener todas las personas
+        // Metodo para obtener todas las personas
 
         public List<Persona> listarPersonas()
         {
@@ -297,6 +280,7 @@ namespace Logica
         // c
         // ALTA DE PERSONA
 
+        // Metodo que da de alta a una persona en el sistema, si ya existe lanza una excepcion, sino la agrega a la lista de personas
         public void altaPersona(Persona p)
         {
             if (p != null)
@@ -312,6 +296,7 @@ namespace Logica
 
         }
 
+        //Busca un activo y lo devuelve, si no lo encuentra devuelve null
         public Activo ActivoBuscado(int id) {
             
             foreach (Activo a in _activos) {
@@ -324,7 +309,7 @@ namespace Logica
         }
 
 
-
+        // Metodo que da de alta a una persona en el sistema, si ya existe lanza una excepcion, sino la agrega a la lista de personas
         public Persona login(string email, string pass) {
 
             foreach (Persona per in _personas) {
@@ -337,6 +322,7 @@ namespace Logica
             return null; 
         }
 
+        // Metodo que da de baja un activo, desvinculandolo de la cuenta, si no existe lanza una excepcion
         public void BajaActivo(int id)
         {
             Activo a = ActivoBuscado(id);
